@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>torrFLIX Premium</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet" href="/static/css/components.css">
+    <link id="theme-style" rel="stylesheet" href="/static/css/themes/dark.css">
+</head>
+<body>
+
+<div id="modal-backdrop"></div>
+
+<!-- Модальное окно авторизации -->
+<div id="authModal" class="auth-modal">
+    <h3 id="authTitle">Вход</h3>
+    
+    <!-- Форма входа -->
+    <div id="loginForm">
+        <input type="text" id="authUsername" placeholder="Логин">
+        <input type="password" id="authPassword" placeholder="Пароль">
+        <button id="authSubmitBtn">Войти</button>
+        <div class="auth-links">
+            <a href="#" onclick="showForgotPassword()">Забыли пароль?</a>
+        </div>
+    </div>
+    
+    <!-- Форма регистрации -->
+    <div id="registerForm" style="display: none;">
+        <input type="text" id="regUsername" placeholder="Логин">
+        <input type="email" id="regEmail" placeholder="Email">
+        <input type="password" id="regPassword" placeholder="Пароль (мин. 8 символов)">
+        <input type="password" id="regPasswordConfirm" placeholder="Подтвердите пароль">
+        <button id="regSubmitBtn">Зарегистрироваться</button>
+    </div>
+    
+    <!-- Форма сброса пароля -->
+    <div id="forgotForm" style="display: none;">
+        <input type="email" id="forgotEmail" placeholder="Ваш email">
+        <button id="forgotSubmitBtn">Отправить ссылку</button>
+        <div class="auth-links">
+            <a href="#" onclick="showLogin()">← Назад к входу</a>
+        </div>
+    </div>
+    
+    <button class="close" onclick="closeAuthModal()">Закрыть</button>
+    <div class="auth-toggle" id="authToggleBtn">Нет аккаунта? Зарегистрироваться</div>
+    <div id="authMessage" style="font-size:12px; text-align:center;"></div>
+</div>
+
+<!-- Модальное окно профиля -->
+<div id="profileModal" class="auth-modal" style="display: none; max-width: 400px;">
+    <h3>👤 Личный кабинет</h3>
+    <div class="profile-content">
+        <div class="profile-avatar" style="text-align: center;">
+            <img id="profileAvatar" src="" alt="Avatar" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; background: #333;">
+            <input type="file" id="avatarUpload" accept="image/*" style="display: none;">
+            <button onclick="document.getElementById('avatarUpload').click()" style="font-size: 12px; margin-top: 8px; background: var(--btn-gray); padding: 5px 10px; border-radius: 5px;">Сменить аватар</button>
+        </div>
+        <div class="profile-info" style="margin-top: 15px;">
+            <p><strong>Логин:</strong> <span id="profileUsername"></span></p>
+            <p><strong>Email:</strong> <span id="profileEmail"></span></p>
+            <p><strong>Статус:</strong> <span id="profileStatus"></span></p>
+            <p><strong>Дата регистрации:</strong> <span id="profileDate"></span></p>
+        </div>
+        <div class="profile-actions" style="display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap;">
+            <button onclick="openFavoritesFromProfile()" class="btn-primary" style="background: var(--accent); flex: 1;">⭐ Избранное</button>
+            <button onclick="showEditProfile()" class="btn-secondary" style="background: var(--btn-gray); flex: 1;">✏️ Редактировать</button>
+            <button onclick="logout(); closeProfileModal();" class="btn-danger" style="background: #d32f2f; flex: 1;">Выйти</button>
+        </div>
+    </div>
+    <button class="close" onclick="closeProfileModal()" style="margin-top: 15px;">Закрыть</button>
+</div>
+
+<!-- Модальное окно редактирования профиля -->
+<div id="editProfileModal" class="auth-modal" style="display: none; max-width: 400px;">
+    <h3>Редактировать профиль</h3>
+    <input type="email" id="editEmail" placeholder="Новый email">
+    <input type="password" id="editCurrentPassword" placeholder="Текущий пароль (для смены пароля)">
+    <input type="password" id="editNewPassword" placeholder="Новый пароль">
+    <input type="password" id="editConfirmPassword" placeholder="Подтвердите новый пароль">
+    <button onclick="saveProfile()">Сохранить</button>
+    <button class="close" onclick="closeEditProfileModal()">Отмена</button>
+    <div id="editProfileMessage" style="font-size:12px; text-align:center; margin-top:10px;"></div>
+</div>
+
+<!-- Модальное окно избранного -->
+<div id="favoritesModal" class="auth-modal" style="display: none; max-width: 600px; width: 90%; max-height: 80vh; overflow-y: auto;">
+    <h3>⭐ Избранное</h3>
+    <div id="favoritesGrid" style="max-height: 60vh; overflow-y: auto; padding: 10px;">
+        <div style="text-align: center; padding: 40px; opacity: 0.6;">Загрузка...</div>
+    </div>
+    <button class="close" onclick="closeFavoritesModal()" style="margin-top: 15px;">Закрыть</button>
+</div>
+
+<!-- Модальное окно для трейлера -->
+<div id="trailerModal" class="trailer-modal" style="display: none;">
+    <div class="trailer-modal-content">
+        <button class="trailer-modal-close" onclick="closeTrailerModal()">✕</button>
+        <div id="trailerModalPlayer" class="trailer-modal-player"></div>
+    </div>
+</div>
+
+<header>
+    <div class="nav-group">
+        <div class="logo" onclick="location.reload()">torr<span>FLIX</span></div>
+        <button id="btn-movie" class="nav-item active" onclick="setType('movie')">Фильмы</button>
+        <button id="btn-tv" class="nav-item" onclick="setType('tv')">Сериалы</button>
+        <select id="gS" class="genre-select" onchange="handleSelectChange(this.value)"></select>
+    </div>
+    <div class="nav-group">
+        <input type="text" id="sI" class="ui-input" placeholder="Поиск по названию...">
+        <select id="themeSelect" class="theme-select">
+            <option value="dark">🌙 Тёмная</option>
+            <option value="light">☀️ Светлая</option>
+            <option value="cinemora">🎥 Кинемора</option>
+            <option value="velvetnight">🖤 Бархатная ночь</option>
+            <option value="obsidian">⚫ Брутальная</option>
+            <option value="aurora">🌌 Аврора</option>
+            <option value="sunset">🌅 Закат</option>
+            <option value="ocean">🌊 Океан</option>
+            <option value="minimal">◻️ Минимализм</option>
+            <option value="voidglitch">☢️ Цифровая Бездна</option>
+            <option value="bloodvoid">🩸 Кровавая Бездна</option>
+            <option value="toxichaze">☣️ Токсичный Туман</option>
+            <option value="chromefall">🟠 Ржавый Хром</option>
+            <option value="retro">📼 Ретро</option>
+            <option value="cyberpunk">💀 Киберпанк</option>
+        </select>
+        <button id="authButton" class="nav-item" onclick="openAuthModal()">Войти</button>
+        <button id="profileButton" class="nav-item" style="display: none;" onclick="openProfileModal()">👤 Профиль</button>
+        <button id="logoutButton" class="nav-item" style="display: none;" onclick="logout()">Выйти</button>
+    </div>
+</header>
+
+<div id="grid" class="grid"></div>
+
+<div id="modal" onclick="if(event.target==this) closeM()">
+    <div class="m-content">
+        <div class="m-header">
+            <img id="mPoster" class="m-poster" src="">
+            <div class="m-right">
+                <h1 id="mTitle"></h1>
+                <div id="mRating" style="color:#ffc107; font-weight:900; font-size:18px;"></div>
+                <p id="mDesc"></p>
+                <div style="display:flex; gap:15px; align-items:center; flex-wrap: wrap;">
+                    <button id="btnTr" class="btn-trailer" onclick="showTrailer()">▶ Трейлер</button>
+                    <button id="btnFav" class="btn-fav" onclick="toggleFavorite()">🤍 В избранное</button>
+                    <div id="mGenreLabel" style="opacity:0.6; font-size:14px; font-weight:600;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="t-section">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:25px;">
+                <h3 style="text-transform:uppercase; font-size:14px; letter-spacing:2px; margin:0; opacity:0.7;">Доступные раздачи</h3>
+                <div style="font-size:12px; opacity:0.5;">Найденные результаты с трекеров</div>
+            </div>
+            <div id="mTorr"></div>
+        </div>
+    </div>
+</div>
+
+<script src="/static/js/api.js"></script>
+<script src="/static/js/auth.js"></script>
+<script src="/static/js/profile.js"></script>
+<script src="/static/js/favorites.js"></script>
+<script src="/static/js/ui.js"></script>
+<script src="/static/js/torrents.js"></script>
+<script src="/static/js/main.js"></script>
+
+<script>
+    // Дополнительные функции для уведомлений
+    function showNotification(message, type = 'info') {
+        let notification = document.getElementById('notification');
+        if (!notification) {
+            notification = document.createElement('div');
+            notification.id = 'notification';
+            notification.style.cssText = 'position:fixed; top:20px; right:20px; padding:12px 20px; border-radius:8px; z-index:10001; background:#333; color:white; font-size:14px; box-shadow:0 4px 12px rgba(0,0,0,0.3);';
+            document.body.appendChild(notification);
+        }
+        notification.textContent = message;
+        notification.style.background = type === 'success' ? '#4caf50' : type === 'error' ? '#f44336' : type === 'warning' ? '#ff9800' : '#2196f3';
+        notification.style.display = 'block';
+        setTimeout(() => { notification.style.display = 'none'; }, 3000);
+    }
+
+    // Закрытие модалок по ESC
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeAuthModal();
+            if (typeof closeProfileModal === 'function') closeProfileModal();
+            if (typeof closeEditProfileModal === 'function') closeEditProfileModal();
+            if (typeof closeFavoritesModal === 'function') closeFavoritesModal();
+            if (typeof closeTrailerModal === 'function') closeTrailerModal();
+            if (typeof closeM === 'function') closeM();
+        }
+    });
+
+    // Закрытие по клику на backdrop
+    document.getElementById('modal-backdrop')?.addEventListener('click', function() {
+        closeAuthModal();
+        if (typeof closeProfileModal === 'function') closeProfileModal();
+        if (typeof closeEditProfileModal === 'function') closeEditProfileModal();
+        if (typeof closeFavoritesModal === 'function') closeFavoritesModal();
+    });
+
+    // Обновляем кнопку избранного при открытии модалки фильма
+    const originalOpenM = window.openM;
+    if (originalOpenM) {
+        window.openM = async function(m) {
+            await originalOpenM(m);
+            setTimeout(() => {
+                if (typeof updateFavoriteButtonInModal === 'function') {
+                    updateFavoriteButtonInModal();
+                }
+            }, 100);
+        };
+    }
+    
+    // Объявляем функцию для глобального доступа
+    window.showNotification = showNotification;
+</script>
+
+</body>
+</html>
