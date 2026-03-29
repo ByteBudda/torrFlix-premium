@@ -1,0 +1,1 @@
+{"tmdb_key": "your_key", "jack_url": "http://127.0.0.1:9117", "jack_key": "Jackett_api_key", "prowlarr_url": "http://127.0.0.1:9696", "prowlarr_key": "your_prowlarr_api_key", "smtp_server": "smtp.mail.ru", "smtp_port": 465, "smtp_user": "user@mail.ru", "smtp_password": "your_mail_app_pass", "site_url": "https://yoursite.org"}

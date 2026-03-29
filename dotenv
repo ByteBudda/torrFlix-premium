@@ -1,0 +1,25 @@
+ 
+# TMDB
+TMDB_KEY=your_tmdb_api_key
+
+# Jackett
+JACKETT_URL=http://127.0.0.1:9117
+JACKETT_KEY=your_jackett_api_key
+
+# Prowlarr
+PROWLARR_URL=http://127.0.0.1:9696
+PROWLARR_KEY=your_prowlarr_api_key
+
+# JWT
+JWT_SECRET=your-super-secret-key-change-this
+
+# Admin
+ADMIN_USER=admin
+ADMIN_PASS=password
+
+# Email
+SMTP_SERVER=smtp.gmail.com
+SMTP_PORT=587
+SMTP_USER=your-email@gmail.com
+SMTP_PASSWORD=your-app-password
+SITE_URL=http://localhost:8800
