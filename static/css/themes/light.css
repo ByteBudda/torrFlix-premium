@@ -1,0 +1,35 @@
+:root {
+    --bg: #ffffff;
+    --text: #2c3e50;
+    --accent: #3498db;
+    --header-bg: rgba(255, 255, 255, 0.96);
+    --card-bg: #f8f9fa;
+    --glass-border: rgba(52, 152, 219, 0.2);
+    --btn-gray: rgba(52, 152, 219, 0.08);
+    --modal-bg: #ffffff;
+    --input-bg: #f1f3f5;
+    --t-row-bg: #f8f9fa;
+    --tag-bg: #3498db;
+    --tag-text: #ffffff;
+}
+
+.card {
+    border: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+.btn-watch {
+    background: var(--accent);
+    color: white;
+}
+
+.tag-studio, .tag-audio {
+    background: #e9ecef;
+    color: #2c3e50;
+    border: none;
+}
