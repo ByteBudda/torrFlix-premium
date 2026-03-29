@@ -1,0 +1,25 @@
+:root {
+    --bg: #1c1410;
+    --header-bg: rgba(28,20,16,0.96);
+    --modal-bg: #2a211c;
+    --card-bg: #3a2e27;
+    --text: #f0d9b8;
+    --accent: #ffaa00;           /* медный/золотой хром */
+    --btn-gray: rgba(255, 170, 0, 0.2);
+    --glass-border: rgba(255, 200, 100, 0.4);
+    --t-row-bg: rgba(60, 45, 35, 0.9);
+    --tag-bg: #8b5a2b;
+    --tag-text: #fff;
+    --input-bg: #2a211c;
+}
+
+body { background: linear-gradient(to bottom, #1c1410, #2f2118); }
+
+.m-content {
+    border: 1px solid #ffaa00;
+    box-shadow: 0 0 40px rgba(255,170,0,0.25);
+}
+
+.card:hover {
+    filter: brightness(1.1) sepia(0.3);
+}

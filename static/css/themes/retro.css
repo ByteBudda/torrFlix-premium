@@ -1,0 +1,30 @@
+ 
+:root {
+    --bg: #2b2118;
+    --text: #e0b57c;
+    --accent: #c97e5a;
+    --header-bg: rgba(43, 33, 24, 0.95);
+    --card-bg: #3a2c21;
+    --glass-border: rgba(201, 126, 90, 0.3);
+    --btn-gray: rgba(201, 126, 90, 0.2);
+    --modal-bg: #3a2c21;
+    --input-bg: rgba(201, 126, 90, 0.1);
+    --t-row-bg: rgba(201, 126, 90, 0.05);
+    --tag-bg: #c97e5a;
+    --tag-text: #2b2118;
+}
+
+body {
+    font-family: 'Courier New', monospace;
+    background-image: repeating-linear-gradient(45deg, rgba(201, 126, 90, 0.05) 0px, rgba(201, 126, 90, 0.05) 2px, transparent 2px, transparent 8px);
+}
+
+.card {
+    border: 1px solid var(--accent);
+    box-shadow: 5px 5px 0px var(--accent);
+}
+
+.card:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 8px 8px 0px var(--accent);
+}

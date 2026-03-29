@@ -1,0 +1,48 @@
+:root {
+    --bg: #0a0a2a;
+    --text: #00ffff;
+    --accent: #ff00ff;
+    --header-bg: rgba(10, 10, 42, 0.95);
+    --card-bg: #1a1a3a;
+    --glass-border: rgba(0, 255, 255, 0.4);
+    --btn-gray: rgba(255, 0, 255, 0.2);
+    --modal-bg: #0f0f2f;
+    --input-bg: rgba(0, 255, 255, 0.1);
+    --t-row-bg: rgba(0, 255, 255, 0.05);
+    --tag-bg: #ff00ff;
+    --tag-text: #000000;
+}
+
+body {
+    font-family: 'Courier New', monospace;
+    background-image: repeating-linear-gradient(0deg, rgba(0, 255, 255, 0.03) 0px, rgba(0, 255, 255, 0.03) 2px, transparent 2px, transparent 6px);
+}
+
+.card {
+    border: 1px solid var(--accent);
+    box-shadow: 0 0 10px var(--accent);
+    transition: 0.1s;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 0 20px var(--accent), 0 0 5px var(--text);
+    animation: glitch 0.1s infinite;
+}
+
+@keyframes glitch {
+    0% { transform: translateY(-6px) skewX(0deg); }
+    100% { transform: translateY(-6px) skewX(1deg); }
+}
+
+.btn-watch {
+    background: var(--accent);
+    text-shadow: 0 0 5px #fff;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.8; }
+    50% { opacity: 1; text-shadow: 0 0 10px #fff; }
+    100% { opacity: 0.8; }
+}

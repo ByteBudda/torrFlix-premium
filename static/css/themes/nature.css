@@ -1,0 +1,41 @@
+:root {
+    --bg: #1a3b2e;
+    --text: #e8f0e0;
+    --accent: #8bc34a;
+    --header-bg: rgba(26, 59, 46, 0.92);
+    --card-bg: #2c5a44;
+    --glass-border: rgba(139, 195, 74, 0.3);
+    --btn-gray: rgba(139, 195, 74, 0.15);
+    --modal-bg: #2c5a44;
+    --input-bg: rgba(139, 195, 74, 0.1);
+    --t-row-bg: rgba(139, 195, 74, 0.05);
+    --tag-bg: #8bc34a;
+    --tag-text: #1a3b2e;
+}
+
+body {
+    background-image: radial-gradient(circle at 10% 20%, rgba(139, 195, 74, 0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+}
+
+.card {
+    border: 1px solid var(--accent);
+    border-radius: 20px;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    border-color: #c5e1a5;
+    box-shadow: 0 15px 35px rgba(139, 195, 74, 0.3);
+}
+
+.btn-watch {
+    background: var(--accent);
+    color: #1a3b2e;
+    font-weight: bold;
+}
+
+.tag-studio, .tag-audio {
+    background: var(--accent);
+    color: #1a3b2e;
+}

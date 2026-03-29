@@ -1,0 +1,40 @@
+:root {
+    --bg: #050505;
+    --header-bg: rgba(5,5,5,0.98);
+    --modal-bg: #0a0a0a;
+    --card-bg: #111;
+    --text: #ddd;
+    --accent: #00ff9d;           /* кислотно-зелёный глюк */
+    --btn-gray: rgba(0, 255, 157, 0.1);
+    --glass-border: rgba(0, 255, 157, 0.25);
+    --t-row-bg: rgba(20,20,20,0.85);
+    --tag-bg: #ff00aa;
+    --tag-text: #000;
+    --input-bg: #0a0a0a;
+}
+
+body {
+    background: #050505;
+    animation: glitch-bg 8s infinite alternate;
+}
+
+@keyframes glitch-bg {
+    0% { background: #050505; }
+    50% { background: #0a0005; }
+    100% { background: #05050a; }
+}
+
+.card:hover {
+    transform: translateY(-6px) skew(2deg);
+    filter: hue-rotate(90deg) saturate(1.8);
+    box-shadow: 0 0 40px #00ff9d;
+}
+
+.m-content {
+    border: 2px dashed rgba(0, 255, 157, 0.4);
+    animation: glitch-border 1.5s infinite;
+}
+
+.t-row:hover {
+    animation: row-glitch 0.4s linear;
+}

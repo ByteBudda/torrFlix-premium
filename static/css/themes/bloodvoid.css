@@ -1,0 +1,28 @@
+:root {
+    --bg: #0c0000;
+    --header-bg: rgba(12,0,0,0.97);
+    --modal-bg: #1a0000;
+    --card-bg: #220000;
+    --text: #ffdddd;
+    --accent: #c41e3a;           /* глубокий кроваво-красный */
+    --btn-gray: rgba(196, 30, 58, 0.15);
+    --glass-border: rgba(200, 40, 70, 0.35);
+    --t-row-bg: rgba(40, 10, 15, 0.9);
+    --tag-bg: #8b0000;
+    --tag-text: #ffdddd;
+    --input-bg: #1a0000;
+}
+
+body { background: radial-gradient(circle at center, #1a0000, #0c0000); }
+
+.logo { text-shadow: 0 0 15px #c41e3a; }
+
+.nav-item.active {
+    background: #c41e3a;
+    box-shadow: 0 0 30px #c41e3a;
+}
+
+.card:hover {
+    border-color: #ff3333;
+    box-shadow: 0 20px 50px rgba(196, 30, 58, 0.6);
+}
