@@ -1,0 +1,15 @@
+ 
+:root {
+    --bg: #f8f8fa;
+    --text: #1d1d1f;
+    --accent: #e50914;
+    --header-bg: rgba(248, 248, 250, 0.8);
+    --card-bg: #ffffff;
+    --glass-border: rgba(0, 0, 0, 0.08);
+    --btn-gray: rgba(0, 0, 0, 0.04);
+    --modal-bg: #ffffff;
+    --input-bg: rgba(0, 0, 0, 0.03);
+    --t-row-bg: rgba(0, 0, 0, 0.01);
+    --tag-bg: #1d1d1f;
+    --tag-text: #ffffff;
+}
