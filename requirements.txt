@@ -4,4 +4,4 @@ httpx
 aiofiles
 pydantic
 pydantic[email]
-jose
+python-jose
