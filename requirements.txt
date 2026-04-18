@@ -1,0 +1,7 @@
+fastapi
+uvicorn[standard]
+httpx
+aiofiles
+pydantic
+pydantic[email]
+jose
